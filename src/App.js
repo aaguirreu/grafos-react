@@ -2,6 +2,7 @@ import logo from './logo.svg';
 import './App.css';
 import Graph from "react-graph-vis";
 import React, { createRef, useState } from "react";
+import { mostrarMatriz, tipoGrafo } from './functions';
 
 const options = {
   layout: {
@@ -32,8 +33,8 @@ const App = () => {
           ],
           edges: [
             ...edges,
-            { from: from, to: id },
-            { from: id, to: from }
+            { from: from, to: id, sentido: `Simple` },
+            { from: id, to: from, sentido: `Simple` }
           ]
         },
         counter: id,
@@ -72,7 +73,7 @@ const App = () => {
           ],
           edges: [
             ...edges,
-            {from: from, to: to}
+            {from: from, to: to, sentido: `Dirigido`}
           ]
         },
         counter: id,
@@ -138,7 +139,41 @@ const App = () => {
       }
     });
   }
-  
+
+  const crearMatriz = () => {
+    setState(({ graph: { nodes, edges }, counter, ...rest }) => {
+      const id = counter;
+      const from = parseInt(selectedAux)
+      const to = parseInt(selected)
+      Vertices = []
+      Aristas = []
+      
+      for(let v of nodes) {
+        Vertices.push(v)
+      }
+      for(let a of edges) {
+        Aristas.push(a)
+      }
+      mostrarMatriz(Vertices, Aristas)
+      tipoGrafo(Vertices, Aristas)
+      return {
+        graph: {
+          nodes: [
+            ...nodes,
+          ],
+          edges: [
+            ...edges,
+          ]
+        },
+        counter: id,
+        ...rest
+      }
+    });
+  }
+
+  var Aristas = []
+  var Vertices = []
+
   var tool
   var selected
   var selectedAux
@@ -182,6 +217,7 @@ const App = () => {
     crearEdgeDoble.setAttribute("class","tool on")
     console.log("Tool: nodes-doble")
     tool = "nodes"
+    crearMatriz()
     //changeCursor()
   })
 
