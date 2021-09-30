@@ -31,6 +31,25 @@ button{
     margin-top: 4px;
 }
 
+.propiedades {
+  background: #6b6a6a;
+  display: block;
+  text-align: center;
+  border-bottom: 3px solid #252525;
+  color: #e8e8e8;
+}
+
+.analisis {
+  width: 235px;
+  height: 180px;
+  background:darkgray;
+  margin: 8px;
+}
+.analisis > * {
+  margin: 0;
+  text-align: center;
+}
+
   .auto          { cursor: auto; }
   .default       { cursor: default; }
   .none          { cursor: none; }

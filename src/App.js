@@ -2,7 +2,7 @@ import logo from './logo.svg';
 import './App.css';
 import Graph from "react-graph-vis";
 import React, { createRef, useState } from "react";
-import { mostrarMatriz, tipoGrafo } from './functions';
+import functions from './functions';
 
 const options = {
   layout: {
@@ -13,12 +13,50 @@ const options = {
   }
 };
 
+var Aristas = []
+var Vertices = []
+
+var tool
+var selected
+var selectedAux
+var selectedNode
+var selectedEdge
+var color = randomColor()
+
 function randomColor() {
   const red = Math.floor(Math.random() * 256).toString(16).padStart(2, '0');
   const green = Math.floor(Math.random() * 256).toString(16).padStart(2, '0');
   const blue = Math.floor(Math.random() * 256).toString(16).padStart(2, '0');
   return `#${red}${green}${blue}`;
 }
+
+const crearNode = document.querySelector('button[name=nodes]')
+const crearEdge = document.querySelector('button[name=edges-one]')
+const crearEdgeDoble = document.querySelector('button[name=edges-doble]')
+
+crearNode.addEventListener("click", () => {
+  document.querySelectorAll(".tool").forEach((function(x){x.setAttribute("class", "tool");}))
+  crearNode.setAttribute("class","tool on")
+  console.log("Tool: nodes")
+  tool = "nodes"
+  //changeCursor()
+})
+
+crearEdge.addEventListener("click", () => {
+  document.querySelectorAll(".tool").forEach((function(x){x.setAttribute("class", "tool");}))
+  crearEdge.setAttribute("class","tool on")
+  console.log("Tool: edges-one")
+  tool = "edges-one"
+  //changeCursor()
+})
+
+crearEdgeDoble.addEventListener("click", (e) => {
+  document.querySelectorAll(".tool").forEach((function(x){x.setAttribute("class", "tool");}))
+  crearEdgeDoble.setAttribute("class","tool on")
+  console.log("Tool: nodes-doble")
+  tool = "nodes"
+  //changeCursor()
+})
 
 const App = () => {
   const createNode = (x, y, selected) => {
@@ -145,17 +183,8 @@ const App = () => {
       const id = counter;
       const from = parseInt(selectedAux)
       const to = parseInt(selected)
-      Vertices = []
-      Aristas = []
-      
-      for(let v of nodes) {
-        Vertices.push(v)
-      }
-      for(let a of edges) {
-        Aristas.push(a)
-      }
-      mostrarMatriz(Vertices, Aristas)
-      tipoGrafo(Vertices, Aristas)
+      functions.Matriz(nodes, edges)
+      //tipoGrafo(Vertices, Aristas)
       return {
         graph: {
           nodes: [
@@ -171,15 +200,6 @@ const App = () => {
     });
   }
 
-  var Aristas = []
-  var Vertices = []
-
-  var tool
-  var selected
-  var selectedAux
-  var selectedNode
-  var selectedEdge
-  var color = randomColor()
   const [cursor, setCursor] = useState('crosshair');
 
   const changeCursor = () => {
@@ -191,35 +211,6 @@ const App = () => {
       return 'nw-resize';
     });
   }
-
-  const crearNode = document.querySelector('button[name=nodes]')
-  const crearEdge = document.querySelector('button[name=edges-one]')
-  const crearEdgeDoble = document.querySelector('button[name=edges-doble]')
-
-  crearNode.addEventListener("click", (e) => {
-    document.querySelectorAll(".tool").forEach((function(x){x.setAttribute("class", "tool");}))
-    crearNode.setAttribute("class","tool on")
-    console.log("Tool: nodes")
-    tool = "nodes"
-    //changeCursor()
-  })
-
-  crearEdge.addEventListener("click", (e) => {
-    document.querySelectorAll(".tool").forEach((function(x){x.setAttribute("class", "tool");}))
-    crearEdge.setAttribute("class","tool on")
-    console.log("Tool: edges-one")
-    tool = "edges-one"
-    //changeCursor()
-  })
-
-  crearEdgeDoble.addEventListener("click", (e) => {
-    document.querySelectorAll(".tool").forEach((function(x){x.setAttribute("class", "tool");}))
-    crearEdgeDoble.setAttribute("class","tool on")
-    console.log("Tool: nodes-doble")
-    tool = "nodes"
-    crearMatriz()
-    //changeCursor()
-  })
 
   const [state, setState] = useState({
     counter: 1,
@@ -239,6 +230,7 @@ const App = () => {
         infoNodes(nodes)
         if(tool === "edges-one")
         createEdge(selectedNode, selectedAux);
+        crearMatriz()
       },
       selectEdge: ({ edges }) => {
         infoEdges(edges)
