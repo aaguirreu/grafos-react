@@ -2,23 +2,23 @@ var Matriz
 var Index
 var MatrizAdy 
 var columnas 
-var aux
 module.exports = {
     Matriz: function (Vertices, Aristas) {
         Index = []
         Matriz = []
         for (let i = 0; i < Vertices.length; i++) {
-            Index += `${i},`
+            Index += `${i} `
         }
         //console.log(Index)
-        Index = Index.split(",")
+        Index = Index.split(" ")
         Index.pop()
         for (let i = 0; i < Vertices.length; i++) {
             Matriz.push(Index)
         }
+        Index = Index.join(" ")
         console.log(`| ${Index}`)
-        let valor = document.querySelector(".naristas")
-        valor.innerHTML = `ㅤ| ${Index}`
+        let valor = document.querySelector(".filas")
+        valor.innerHTML = `| ${Index}`
         this.mostrarMatriz(Vertices, Aristas)
       },
       
@@ -28,10 +28,11 @@ module.exports = {
         for (let i = 0; i < Vertices.length; i++) {
             columnas = []
             for (let j = 0; j < Vertices.length; j++) {
-                columnas += `${Matriz[i][j]},` 
+                columnas += `${Matriz[i][j]} ` 
             }
-            columnas = columnas.split(",")
+            columnas = columnas.split(" ") 
             columnas.pop()
+            columnas = columnas.join(" ")
             columnas2 += `${i} | ${columnas}</p/>`
             console.log(`${i} | ${columnas}`)
         }

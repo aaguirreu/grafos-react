@@ -48,12 +48,16 @@ button{
 .analisis > * {
   margin: 0px;
   margin-left: 3px;
+
 }
 .table > * {
   margin: 0px;
   margin-left: 3px;
 }
 
+.filas {
+  margin-left: 16px;
+}
 
   .auto          { cursor: auto; }
   .default       { cursor: default; }
