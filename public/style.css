@@ -3,16 +3,19 @@
     overflow: hidden;
     height: 96vh;
     width: 20vh;
-    position: absolute;
+    position:absolute;
     float: right;
+    display: block;
   }
 
 .sidebar_right_closed {
   background: #252525;
   overflow: hidden;
   height: 96vh;
-  width: 0vh;
+  width: 20vh;
+  position:absolute;
   float: right;
+  display: none;
   }
 
 .sidebar_top {
