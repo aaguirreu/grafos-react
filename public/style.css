@@ -1,17 +1,17 @@
-.sidebar_right {
+.sidebar_left {
     background: #252525;
     overflow: hidden;
-    height: 96vh;
+    height: 96%;
     width: 20vh;
     position:absolute;
     float: right;
     display: block;
   }
 
-.sidebar_right_closed {
+.sidebar_left_closed {
   background: #252525;
   overflow: hidden;
-  height: 96vh;
+  height: 96%;
   width: 20vh;
   position:absolute;
   float: right;
@@ -20,6 +20,7 @@
 
 .sidebar_top {
     background: #252525;
+    position: relative;
     overflow: hidden;
     height: 4vh;
     width: 100%;
@@ -35,7 +36,7 @@ button{
     background-color: #6b6a6a;
     border-radius: 2px;
     margin-top: 0.55vh;
-    margin-left: 0.4vh;
+    margin-left: 0.55vh;
 }
 
 .tool:hover, .on{
@@ -46,7 +47,7 @@ button{
 .closebtn {
     background-color: #6b6a6a;
     cursor: pointer;
-    margin-left: 1vh;
+    margin-left: 0.55vh;
     margin-right: 15vh;
   }
 

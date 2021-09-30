@@ -34,17 +34,17 @@ const crearNode = document.querySelector('button[name=nodes]')
 const crearEdge = document.querySelector('button[name=edges-one]')
 const crearEdgeDoble = document.querySelector('button[name=edges-doble]')
 const closebtn = document.querySelector('button[name=closebtn]')
-const sidebar = document.querySelector('.sidebar_right')
+const sidebar = document.querySelector('.sidebar_left')
 
 closebtn.addEventListener("click", () => {
   closebtn.setAttribute("class","closebtn on")
   console.log(sidebar.className)
-  if(sidebar.className === "sidebar_right") {
-    sidebar.setAttribute("class","sidebar_right_closed")
+  if(sidebar.className === "sidebar_left") {
+    sidebar.setAttribute("class","sidebar_left_closed")
   }
   else {
     closebtn.setAttribute("class","closebtn")
-    sidebar.setAttribute("class","sidebar_right")
+    sidebar.setAttribute("class","sidebar_left")
   }
 })
 
