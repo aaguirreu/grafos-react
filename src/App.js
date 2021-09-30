@@ -16,7 +16,7 @@ const options = {
 var Aristas = []
 var Vertices = []
 
-var tool
+var tool = "nodes"
 var selected
 var selectedAux
 var selectedNode
@@ -234,10 +234,12 @@ const App = () => {
       },
       selectEdge: ({ edges }) => {
         infoEdges(edges)
+        crearMatriz()
       },
       doubleClick: ({ pointer: { canvas } }) => {
         if(tool === "nodes") 
         createNode(canvas.x, canvas.y, selectedNode);
+        crearMatriz()
       },
       hoverEdge: ({ pointer: { canvas } }) => {
         //createEdge(canvas.x, canvas.y, selectedEdge);

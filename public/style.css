@@ -43,12 +43,17 @@ button{
   width: 235px;
   height: 180px;
   background:darkgray;
-  margin: 8px;
+  margin: 0px;
 }
 .analisis > * {
-  margin: 0;
-  text-align: center;
+  margin: 0px;
+  margin-left: 3px;
 }
+.table > * {
+  margin: 0px;
+  margin-left: 3px;
+}
+
 
   .auto          { cursor: auto; }
   .default       { cursor: default; }

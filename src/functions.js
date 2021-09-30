@@ -16,23 +16,27 @@ module.exports = {
         for (let i = 0; i < Vertices.length; i++) {
             Matriz.push(Index)
         }
-        //console.log(`  | ${Index}`)
-        console.log(`  | ${Index}`)
-        this.mostrarMatriz(Vertices, Aristas, aux)
+        console.log(`| ${Index}`)
+        let valor = document.querySelector(".naristas")
+        valor.innerHTML = `ㅤ| ${Index}`
+        this.mostrarMatriz(Vertices, Aristas)
       },
       
-    mostrarMatriz: function (Vertices, Aristas, Indecs) {
+    mostrarMatriz: function (Vertices, Aristas) {
+        let columnas2 = []
         this.matrizAdyacencia(Vertices, Aristas)
         for (let i = 0; i < Vertices.length; i++) {
             columnas = []
-            for (let j = 0; j < Vertices.length; j++) {     
-                columnas += `${Matriz[i][j]},`           
+            for (let j = 0; j < Vertices.length; j++) {
+                columnas += `${Matriz[i][j]},` 
             }
             columnas = columnas.split(",")
             columnas.pop()
+            columnas2 += `${i} | ${columnas}</p/>`
             console.log(`${i} | ${columnas}`)
         }
-
+        let valor = document.querySelector(".table")
+        valor.innerHTML = columnas2
         //alert(Index)
       },
 
