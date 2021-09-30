@@ -3,6 +3,7 @@
     overflow: hidden;
     height: 96vh;
     width: 20vh;
+    position: absolute;
     float: right;
   }
 
