@@ -33,6 +33,20 @@ function randomColor() {
 const crearNode = document.querySelector('button[name=nodes]')
 const crearEdge = document.querySelector('button[name=edges-one]')
 const crearEdgeDoble = document.querySelector('button[name=edges-doble]')
+const closebtn = document.querySelector('button[name=closebtn]')
+const sidebar = document.querySelector('.sidebar_right')
+
+closebtn.addEventListener("click", () => {
+  closebtn.setAttribute("class","closebtn on")
+  console.log(sidebar.className)
+  if(sidebar.className === "sidebar_right") {
+    sidebar.setAttribute("class","sidebar_right_closed")
+  }
+  else {
+    closebtn.setAttribute("class","closebtn")
+    sidebar.setAttribute("class","sidebar_right")
+  }
+})
 
 crearNode.addEventListener("click", () => {
   document.querySelectorAll(".tool").forEach((function(x){x.setAttribute("class", "tool");}))

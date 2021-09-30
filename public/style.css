@@ -1,23 +1,30 @@
 .sidebar_right {
     background: #252525;
     overflow: hidden;
-    height: 100vh;
+    height: 96vh;
     width: 20vh;
     float: right;
   }
 
-.sidebar_left {
+.sidebar_right_closed {
+  background: #252525;
+  overflow: hidden;
+  height: 96vh;
+  width: 0vh;
+  float: right;
+  }
+
+.sidebar_top {
     background: #252525;
     overflow: hidden;
-    height: 100vh;
-    width: 4vh;
-    float: left;
+    height: 4vh;
+    width: 100%;
   }
 
 .ticon {
     width: 16px;
     height: 16px;
-    padding: 2px
+    padding: 2px;
   }
 
 .tool:hover, .on{
@@ -25,10 +32,23 @@
     cursor: pointer;
   }
 
+.closebtn {
+    background-color: #464646;
+    cursor: pointer;
+    margin-left: 90.3%;
+  }
+
+.closebtn:hover, .on{
+    background-color: #464646;
+    cursor: pointer;
+    margin-left: 90.3%;
+  }
+
 button{
     background-color: #6b6a6a;
     border-radius: 2px;
     margin-top: 4px;
+    margin-left: 4px;
 }
 
 .propiedades {
