@@ -26,10 +26,17 @@
   }
 
 .ticon {
-    width: 16px;
-    height: 16px;
-    padding: 2px;
+    width: 2vh;
+    height: 2vh;
+    padding: 0px;
   }
+
+button{
+    background-color: #6b6a6a;
+    border-radius: 2px;
+    margin-top: 0.55vh;
+    margin-left: 0.4vh;
+}
 
 .tool:hover, .on{
     background-color: #464646;
@@ -37,23 +44,18 @@
   }
 
 .closebtn {
-    background-color: #464646;
-    cursor: pointer;
-    margin-left: 90.3%;
-  }
-
-.closebtn:hover, .on{
-    background-color: #464646;
-    cursor: pointer;
-    margin-left: 90.3%;
-  }
-
-button{
     background-color: #6b6a6a;
-    border-radius: 2px;
-    margin-top: 4px;
-    margin-left: 4px;
-}
+    cursor: pointer;
+    margin-left: 1vh;
+    margin-right: 15vh;
+  }
+
+.closebtn:hover, .on {
+    background-color: #464646;
+    cursor: pointer;
+  }
+
+
 
 .propiedades {
   background: #6b6a6a;
