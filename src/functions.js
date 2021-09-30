@@ -7,16 +7,16 @@ module.exports = {
         Index = []
         Matriz = []
         for (let i = 0; i < Vertices.length; i++) {
-            Index += `${i} `
+            Index += `${i+1} `
         }
         //console.log(Index)
         Index = Index.split(" ")
         Index.pop()
         for (let i = 0; i < Vertices.length; i++) {
-            Matriz.push(Index)
+            Matriz[i] = new Array(Vertices.length)
         }
         Index = Index.join(" ")
-        console.log(`| ${Index}`)
+        //console.log(`| ${Index}`)
         let valor = document.querySelector(".filas")
         valor.innerHTML = `| ${Index}`
         this.mostrarMatriz(Vertices, Aristas)
@@ -24,6 +24,14 @@ module.exports = {
       
     mostrarMatriz: function (Vertices, Aristas) {
         let columnas2 = []
+        let cta = 0
+        // Da valor 0 a cada elemento de la matriz
+        for (let i = 0; i < Vertices.length; i++) {
+            for (let j = 0; j < Vertices.length; j++) {
+                Matriz[i][j] = 0
+                cta++
+            }  
+        }
         this.matrizAdyacencia(Vertices, Aristas)
         for (let i = 0; i < Vertices.length; i++) {
             columnas = []
@@ -33,8 +41,8 @@ module.exports = {
             columnas = columnas.split(" ") 
             columnas.pop()
             columnas = columnas.join(" ")
-            columnas2 += `${i} | ${columnas}</p/>`
-            console.log(`${i} | ${columnas}`)
+            columnas2 += `${i+1} | ${columnas}</p/>`
+            //console.log(`${i+1} | ${columnas}`)
         }
         let valor = document.querySelector(".table")
         valor.innerHTML = columnas2
@@ -42,11 +50,9 @@ module.exports = {
       },
 
     matrizAdyacencia: function (Vertices, Aristas) {
-        for (let i = 0; i < Vertices.length; i++) {
-            for (let j = 0; j < Vertices.length; j++) {
-                Matriz[i][j] = 0
-            }  
-        }
+        for(let arista of Aristas) {
+            Matriz[arista.from - 1][arista.to - 1] = 1
+          }
     },
 
     tipoGrafo: function (Vertices, Aristas) {

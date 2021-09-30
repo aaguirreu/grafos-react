@@ -56,8 +56,6 @@ button{
     cursor: pointer;
   }
 
-
-
 .propiedades {
   background: #6b6a6a;
   display: block;
@@ -67,10 +65,10 @@ button{
 }
 
 .analisis {
-  width: 235px;
-  height: 180px;
+  width: auto;
+  height: auto;
   background:darkgray;
-  margin: 0px;
+  margin: 0px
 }
 .analisis > * {
   margin: 0px;

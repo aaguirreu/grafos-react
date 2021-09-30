@@ -68,7 +68,7 @@ crearEdgeDoble.addEventListener("click", (e) => {
   document.querySelectorAll(".tool").forEach((function(x){x.setAttribute("class", "tool");}))
   crearEdgeDoble.setAttribute("class","tool on")
   console.log("Tool: nodes-doble")
-  tool = "nodes"
+  tool = "nodes-doble"
   //changeCursor()
 })
 
@@ -85,8 +85,6 @@ const App = () => {
           ],
           edges: [
             ...edges,
-            { from: from, to: id, sentido: `Simple` },
-            { from: id, to: from, sentido: `Simple` }
           ]
         },
         counter: id,
@@ -95,12 +93,82 @@ const App = () => {
     });
   }
   
+  const createEdgeDoble = (selected, selectedAux) => {
+    setState(({ graph: { nodes, edges }, counter, ...rest }) => {
+      const id = counter;
+      const from = parseInt(selectedAux)
+      const to = parseInt(selected)
+      console.log("aqui1")
+      if (isNaN(from)) {
+        return {
+          graph: {
+            nodes: [
+              ...nodes,
+            ],
+            edges: [
+              ...edges,
+            ]
+          },
+          counter: id,
+          ...rest
+        }
+      }
+      console.log("aqui2")
+      for(let i of edges) {
+        if(i.from === from && i.to === to || i.to === from && i.from === to) {
+          //console.log(`Ya existe ${i}`)
+          return {
+            graph: {
+              nodes: [
+                ...nodes,
+              ],
+              edges: [
+                ...edges,
+              ]
+            },
+            counter: id,
+            ...rest
+          }
+        }
+      }
+      tool = "2await"
+      console.log("aqui3")
+      return {
+        graph: {
+          nodes: [
+            ...nodes,
+          ],
+          edges: [
+            ...edges,
+            {from: from, to: to, sentido: `Simple`},
+            {from: to, to: from, sentido: `Simple`}
+          ]
+        },
+        counter: id,
+        ...rest
+      }
+    });
+  }
+
   const createEdge = (selected, selectedAux) => {
     setState(({ graph: { nodes, edges }, counter, ...rest }) => {
       const id = counter;
       const from = parseInt(selectedAux)
       const to = parseInt(selected)
-      selected = null
+      if (isNaN(from)) {
+        return {
+          graph: {
+            nodes: [
+              ...nodes,
+            ],
+            edges: [
+              ...edges,
+            ]
+          },
+          counter: id,
+          ...rest
+        }
+      }
       for(let i of edges) {
         if(i.from === from && i.to === to) {
           //console.log(`Ya existe ${i}`)
@@ -118,6 +186,7 @@ const App = () => {
           }
         }
       }
+      tool = "await"
       return {
         graph: {
           nodes: [
@@ -236,18 +305,20 @@ const App = () => {
     },
     events: {
       selectNode: ({ nodes }) => {
-        //console.log("Selected nodes:");
-        //console.log(nodes);
+        console.log("Selected nodes:");
+        console.log(nodes);
         //alert("Selected node: " + nodes);
         selectedNode = nodes
         selected = nodes
-        infoNodes(nodes)
+        //infoNodes(nodes)
         if(tool === "edges-one")
         createEdge(selectedNode, selectedAux);
+        if(tool === "nodes-doble")
+        createEdgeDoble(selectedNode, selectedAux);
         crearMatriz()
       },
       selectEdge: ({ edges }) => {
-        infoEdges(edges)
+        //infoEdges(edges)
         crearMatriz()
       },
       doubleClick: ({ pointer: { canvas } }) => {
@@ -259,13 +330,26 @@ const App = () => {
         //createEdge(canvas.x, canvas.y, selectedEdge);
       },
       deselectNode:  () => {
-        //console.log("Deselected node:");
-        //console.log(selected);
+        console.log("Deselected node:");
+        console.log(selected);
         selectedAux = selected
+        if (tool === "await2") {
+          tool = "edges-one"
+        }
+        if (tool === "await") {
+          tool = "await2"
+        }
+        if (tool === "2await2") {
+          tool = "nodes-doble"
+        }
+        if (tool === "2await") {
+          tool = "2await2"
+        }
+        
       },
       deselectEdge:  () => {
-        //console.log("Deselected edge:");
-        //console.log(selected);
+        console.log("Deselected edge:");
+        console.log(selected);
         selectedAux = selected
       }
     }
