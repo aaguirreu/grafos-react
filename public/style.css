@@ -71,7 +71,7 @@ tr > :first-child {
     height: 30px;
     border-radius: 2px;
     margin-top: 0.55vh;
-    left: calc(50vw + 0px);
+    left: calc(50vw - 30px);
     top: 0vh;
     margin-left: 0.55vh;
     z-index: 1;
@@ -92,7 +92,7 @@ tr > :first-child {
   position: absolute;
   border-radius: 2px;
   margin-top: 0.55vh;
-  left: calc(50vw + 40px);
+  left: calc(50vw + 40px - 30px);
   top: 0vh;
   margin-left: 0.55vh;
   z-index: 1;
@@ -113,7 +113,7 @@ tr > :first-child {
   position: absolute;
   border-radius: 2px;
   margin-top: 0.55vh;
-  left: calc(50vw + 80px);;
+  left: calc(50vw + 80px - 30px);;
   top: 0vh;
   margin-left: 0.55vh;
   z-index: 1;
