@@ -13,109 +13,143 @@ td {
 
 tr > :first-child {
   display: table-cell;
-  background: #555555;
+  background: 
+  #555555;
+}
+.sidebar_top {
+  background-color: rgba(15, 15, 15, 0.247);
+  position: absolute;
+  overflow: hidden;
+  height: 4vh;
+  width: 100vw;
+  min-height: 25px;
+  float: left;
+  display: block;
 }
 
 .sidebar_left {
-  margin-top: 4vh;
-    background: #252525;
-    overflow: hidden;
-    min-height: 96vh;
-    min-width: 20vh;
-    position:relative;
-    float: left;
-    display: block;
+  padding-top: 4vh;
+  background: rgba(0, 0, 0, 0.438);
+  overflow: hidden;
+  height: 96vh;
+  width: 20vw;
+  position:absolute;
+  float: left;
+  transform: translate3d(0px, 0px, 0px);
+  visibility: visible;
+  transition: all 0.5s ease-out 0s;
   }
 
 .sidebar_left_closed {
+  padding-top: 4vh;
+  position:absolute;
   background: #252525;
   overflow: hidden;
   width: 4.5vh;
   float: left;
-  display: none;
+  transform: translate3d(-100%, 0px, 0px);
+  visibility: visible;
+  transition: all 0.5s ease-out 0s;
   }
 
 .ticon {
-    width: 2vh;
-    height: 2vh;
+    width: 16px;
+    height: 16px;
     padding: 0px;
   }
+
+.on {
+    background-color: rgba(0, 0, 0, 0.062) !important;
+  }
+  
 .nodes {
-    background-color: #6b6a6a;
+    filter: invert();
+    background: none;
+    border: none;
     position: absolute;
+    width: 30px;
+    height: 30px;
     border-radius: 2px;
     margin-top: 0.55vh;
-    left: 5vh;
+    left: calc(50vw + 0px);
     top: 0vh;
     margin-left: 0.55vh;
+    z-index: 1;
 }
-.nodes:hover, .on{
-  background-color: #464646;
+
+.nodes:hover {
+  background-color: rgba(0, 0, 0, 0.13);
   cursor: pointer;
   position: absolute;
-
 }
 
 .edges-doble {
-  background-color: #6b6a6a;
+  filter: invert();
+  background: none;
+  border: none;
+  width: 30px;
+  height: 30px;
   position: absolute;
   border-radius: 2px;
   margin-top: 0.55vh;
-  left: 10vh;
+  left: calc(50vw + 40px);
   top: 0vh;
   margin-left: 0.55vh;
+  z-index: 1;
 }
 
-.edges-doble:hover, .on {
-  background-color: #464646;
+.edges-doble:hover {
+  background-color: rgba(0, 0, 0, 0.13);
   cursor: pointer;
   position: absolute;
-  
 }
 
 .edges-one {
-  background-color: #6b6a6a;
+  filter: invert();
+  background: none;
+  border: none;
+  width: 30px;
+  height: 30px;
   position: absolute;
   border-radius: 2px;
   margin-top: 0.55vh;
-  left: 15vh;
+  left: calc(50vw + 80px);;
   top: 0vh;
   margin-left: 0.55vh;
+  z-index: 1;
 }
 
-.edges-one:hover, .on {
-  background-color: #464646;
+.edges-one:hover {
+  background-color: rgba(0, 0, 0, 0.13);
   cursor: pointer;
   position: absolute;
-}
-
-button {
-    background-color: #6b6a6a;
-    position: absolute;
-    border-radius: 2px;
-    margin-top: 0.55vh;
-    top: 0vh;
-    margin-left: 0.55vh;
 }
 
 .tool:hover {
   position: absolute;
-    background-color: #464646;
-    cursor: pointer;
+  background-color: rgba(0, 0, 0, 0.13);
+  cursor: pointer;
   }
 
 .closebtn {
-  position: absolute;
-    background-color: #6b6a6a;
+  filter: invert();
+    background: none;
+    position: absolute;
+    border: none;
     cursor: pointer;
-    left: 0vh;
+    width: 30px;
+    height: 30px;
+    border-radius: 2px;
+    margin-top: 0.55vh;
     top: 0vh;
+    left: 0vw;
+    margin-left: 0.55vh;
     z-index: 1;
+
   }
 
-
 .closebtn:hover {
-    background-color: #464646;
+    background-color: rgba(0, 0, 0, 0.13);
     left: 0vh;
     top: 0vh;
     cursor: pointer;
