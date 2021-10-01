@@ -87,11 +87,14 @@ const App = () => {
     setState(({ graph: { nodes, edges }, counter, ...rest }) => {
       const id = counter + 1;
       const from = parseInt(selected)
+      var label = `${id}`
+      if (id.toString().length == 1)
+        label = ` ${id} `
       return {
         graph: {
           nodes: [
             ...nodes,
-            { id: id, label: ` ${id} `, color, x, y }
+            { id: id, label: label, color, x, y }
           ],
           edges: [
             ...edges,
