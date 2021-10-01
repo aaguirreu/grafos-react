@@ -4,34 +4,22 @@ var MatrizAdy
 var columnas 
 module.exports = {
     Matriz: function (Vertices, Aristas) {
-        Index = []
         Matriz = []
-        for (let i = 0; i < Vertices.length; i++) {
-            Index += `${i+1} `
-        }
-        //console.log(Index)
-        Index = Index.split(" ")
-        Index.pop()
         for (let i = 0; i < Vertices.length; i++) {
             Matriz[i] = new Array(Vertices.length)
         }
-        Index = Index.join(" ")
-        //console.log(`| ${Index}`)
-        let valor = document.querySelector(".filas")
-        valor.innerHTML = `| ${Index}`
+        // Da valor 0 a cada elemento de la matriz
+        for (let i = 0; i < Vertices.length; i++) {
+            for (let j = 0; j < Vertices.length; j++) {
+                Matriz[i][j] = 0
+            }  
+        }
         this.mostrarMatriz(Vertices, Aristas)
       },
       
     mostrarMatriz: function (Vertices, Aristas) {
         let columnas2 = []
-        let cta = 0
-        // Da valor 0 a cada elemento de la matriz
-        for (let i = 0; i < Vertices.length; i++) {
-            for (let j = 0; j < Vertices.length; j++) {
-                Matriz[i][j] = 0
-                cta++
-            }  
-        }
+        
         this.matrizAdyacencia(Vertices, Aristas)
         for (let i = 0; i < Vertices.length; i++) {
             columnas = []
@@ -44,9 +32,26 @@ module.exports = {
             columnas2 += `${i+1} | ${columnas}</p/>`
             //console.log(`${i+1} | ${columnas}`)
         }
-        let valor = document.querySelector(".table")
-        valor.innerHTML = columnas2
+
         //alert(Index)
+
+        var tabla="<table border=\"0\">";
+    
+        tabla+="<tr><td></td>";
+        for(let j=0; j<Vertices.length ;j++){ 
+            tabla+="<td>"+(j+1)+ "</td>";
+        }
+
+        for(let i=0; i < Vertices.length; i++) {
+            tabla+="<tr>";
+            tabla+="<td>" + (i+1) + "</td>";
+            for(let j=0; j < Vertices.length; j++) { 
+                tabla+="<td>" + Matriz[i][j] + "</td>";
+            }
+        tabla+="</tr>";
+        }
+        tabla+="</table>";
+        document.getElementById("resultado").innerHTML=tabla;
       },
 
     matrizAdyacencia: function (Vertices, Aristas) {

@@ -49,30 +49,36 @@ closebtn.addEventListener("click", () => {
 })
 
 crearNode.addEventListener("click", () => {
-  document.querySelectorAll(".tool").forEach((function(x){x.setAttribute("class", "tool");}))
-  crearNode.setAttribute("class","tool on")
+  document.querySelector(".edges-one").setAttribute("class", "edges-one")
+  document.querySelector(".edges-doble").setAttribute("class", "edges-doble")
+  crearNode.setAttribute("class","nodes on")
   console.log("Tool: nodes")
   tool = "nodes"
   //changeCursor()
 })
 
 crearEdge.addEventListener("click", () => {
-  document.querySelectorAll(".tool").forEach((function(x){x.setAttribute("class", "tool");}))
-  crearEdge.setAttribute("class","tool on")
+  //document.querySelectorAll(".tool").forEach((function(x){x.setAttribute("class", "tool");}))
+  document.querySelector(".nodes").setAttribute("class", "nodes")
+  document.querySelector(".edges-doble").setAttribute("class", "edges-doble")
+  crearEdge.setAttribute("class","edges-one on")
   console.log("Tool: edges-one")
   tool = "edges-one"
   //changeCursor()
 })
 
 crearEdgeDoble.addEventListener("click", (e) => {
-  document.querySelectorAll(".tool").forEach((function(x){x.setAttribute("class", "tool");}))
-  crearEdgeDoble.setAttribute("class","tool on")
-  console.log("Tool: nodes-doble")
-  tool = "nodes-doble"
+  //document.querySelectorAll(".tool").forEach((function(x){x.setAttribute("class", "tool");}))
+  document.querySelector(".nodes").setAttribute("class", "nodes")
+  document.querySelector(".edges-one").setAttribute("class", "edges-one")
+  crearEdgeDoble.setAttribute("class","edges-doble on")
+  console.log("Tool: edges-doble")
+  tool = "edges-doble"
   //changeCursor()
 })
 
 const App = () => {
+  
   const createNode = (x, y, selected) => {
     setState(({ graph: { nodes, edges }, counter, ...rest }) => {
       const id = counter + 1;
@@ -296,10 +302,9 @@ const App = () => {
   }
 
   const [state, setState] = useState({
-    counter: 1,
+    counter: 0,
     graph: {
       nodes: [
-        { id: 1, label: `Node ${1}`, color }
       ],
       edges: [],
     },
@@ -313,7 +318,7 @@ const App = () => {
         //infoNodes(nodes)
         if(tool === "edges-one")
         createEdge(selectedNode, selectedAux);
-        if(tool === "nodes-doble")
+        if(tool === "edges-doble")
         createEdgeDoble(selectedNode, selectedAux);
         crearMatriz()
       },
@@ -340,7 +345,7 @@ const App = () => {
           tool = "await2"
         }
         if (tool === "2await2") {
-          tool = "nodes-doble"
+          tool = "edges-doble"
         }
         if (tool === "2await") {
           tool = "2await2"
@@ -354,7 +359,9 @@ const App = () => {
       }
     }
   })
+  
   const { graph, events } = state;
+  
   return (
     <div>
       <div className="App">
@@ -364,6 +371,7 @@ const App = () => {
       </div>
     </div>
   );
+  
 }
 
 export default App;
