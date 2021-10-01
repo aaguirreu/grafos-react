@@ -27,7 +27,11 @@ function randomColor() {
   const red = Math.floor(Math.random() * 256).toString(16).padStart(2, '0');
   const green = Math.floor(Math.random() * 256).toString(16).padStart(2, '0');
   const blue = Math.floor(Math.random() * 256).toString(16).padStart(2, '0');
-  return `#${red}${green}${blue}`;
+  //return `#${red}${green}${blue}`;
+
+  const colores = ['white','#FF93EB','#1C80B5','#1C34B5','#511CB5','#9D1CB5','#B51C80','#B51C33']
+  return colores[Math.floor(Math.random()*colores.length)];
+
 }
 
 const crearNode = document.querySelector('button[name=nodes]')
@@ -87,7 +91,7 @@ const App = () => {
         graph: {
           nodes: [
             ...nodes,
-            { id: id, label: `Node ${id}`, color, x, y }
+            { id: id, label: ` ${id} `, color, x, y }
           ],
           edges: [
             ...edges,
