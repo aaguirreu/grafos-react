@@ -27,8 +27,8 @@ function randomColor() {
   const green = Math.floor(Math.random() * 256).toString(16).padStart(2, '0');
   const blue = Math.floor(Math.random() * 256).toString(16).padStart(2, '0');
   //return `#${red}${green}${blue}`;
-
-  const colores = ['white','#FF93EB','#1C80B5','#1C34B5','#511CB5','#9D1CB5','#B51C80','#B51C33']
+  const colores = ['white','#BDFFFF','#BDDEFF','#BDBDFF','#DEBDFF','#B2FFCE','#B2FFF5','#B2E3FF','#FFBDDE','#FFBDFF','#F4B2FF']
+  //const colores = ['white','#FF93EB','#1C80B5','#1C34B5','#511CB5','#9D1CB5','#B51C80','#B51C33']
   return colores[Math.floor(Math.random()*colores.length)];
 
 }
@@ -83,17 +83,17 @@ crearEdgeDoble.addEventListener("click", (e) => {
   //changeCursor()
 })
 
-
-document.getElementById("matriz").onclick = function() {
-    if(!functions.matrizExist() && !functions2.matrizExist()){
+function info() {
+//document.getElementById("matriz").onclick = function() {
+    /*if(!functions.matrizExist() && !functions2.matrizExist()){
       alert("Debes crear un grafo para usar esta función.")
       return
-    }
+    }*/
     
 
     if(functions.matrizExist()) {
-      document.getElementById("cantidadv").innerHTML = 'Cantidad de vertices: '+functions.CantidadV();
-      document.getElementById("cantidada").innerHTML = 'Cantidad de Aristas: '+functions.CantidadA();
+      document.getElementById("cantidadv").innerHTML = 'Cantidad de Vertices: '+functions.CantidadV();
+      
       if(functions.EsDirigido() == false){
         document.getElementById("dirigido").innerHTML = 'El grafo es Dirigido'
       }
@@ -126,7 +126,6 @@ document.getElementById("matriz").onclick = function() {
     if(functions2.matrizExist()) {
 
       document.getElementById("cantidadv2").innerHTML = 'Cantidad de vertices: '+functions2.CantidadV();
-      document.getElementById("cantidada2").innerHTML = 'Cantidad de Aristas: '+functions2.CantidadA();
       if(functions2.EsDirigido() == false){
         document.getElementById("dirigido2").innerHTML = 'El grafo es Dirigido'
       }
@@ -355,6 +354,7 @@ const App = () => {
       const from = parseInt(selectedAux)
       const to = parseInt(selected)
       functions.generarMatriz(nodes, edges)
+      info()
       //tipoGrafo(Vertices, Aristas)
       return {
         graph: {
@@ -652,11 +652,13 @@ const App2 = () => {
   }
 
   const crearMatriz = () => {
+    
     setState(({ graph: { nodes, edges }, counter, ...rest }) => {
       const id = counter;
       const from = parseInt(selectedAux)
       const to = parseInt(selected)
       functions2.generarMatriz(nodes, edges)
+      info()
       //tipoGrafo(Vertices, Aristas)
       return {
         graph: {

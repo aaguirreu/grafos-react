@@ -22,6 +22,7 @@ function generarMatriz(Vertices, Aristas) {
             }  
         }
         mostrarMatriz(Vertices, Aristas)
+        CantidadA()
       }
       
 function mostrarMatriz (Vertices, Aristas) {
@@ -90,7 +91,7 @@ function dfs (nodo) {
             if( v == 1){
               if(visitados[j] == false){
                 visitados[nodo] = true; // nodo actual marcado como visitado
-                this.dfs(j);
+                dfs(j);
                 
               }
               if( v == 1 && visitados[j] == true && nodo == Matriz.length-1){
@@ -109,7 +110,7 @@ function EsConexo () {
           }
 
           for (let i = 0; i< visitados.length; i++){
-            this.dfs(i);
+            dfs(i);
           }
 
           
@@ -173,7 +174,7 @@ function CycleFinder(nodo) {
         if(Matriz[nodo][j] == 1){
           console.log(ciclos);
 
-          if(this.CycleFinder(j) == true){
+          if(CycleFinder(j)){
             console.log(ciclos);
             return true;
           }
@@ -197,7 +198,7 @@ function EsCiclico () {
           for(let j = 0; j<Matriz.length ; j++){
             if(Matriz[j][c] == 1){conta++}
           }
-          if(conta !=  0){if(this.CycleFinder(c) == true){return true}}
+          if(conta !==  0){if(CycleFinder(c)){return true}}
           
           
 
@@ -206,7 +207,7 @@ function EsCiclico () {
     }
 
 function EsCompleto() {
-      if(this.EsRegular() == false){return false}
+      if(EsRegular() === false){return false}
       else{
         var cont 
         for(let i = 0; i<Matriz.length;i++){
@@ -240,11 +241,11 @@ function CantidadA() {
       var sum = 0;
       for(let i =  0; i<Matriz.length; i++){
         for (let j = 0; j<Matriz.length; j++){
+          if (i<=j)
           sum +=Matriz[i][j];
         }
       }
-      if(this.EsDirigido() == false){return sum}
-      else{return (sum/2)}
+      document.getElementById("cantidada2").innerHTML = `Cantidaaad de Aristas: ${sum}`
     }
 
     /*Regiones: function (){
