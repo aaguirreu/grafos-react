@@ -7,11 +7,8 @@ var aux
 
 module.exports = {
     matrizExist: function () {
-        if(Matriz.length != 0)
-            return true
-        else return false
+      return Matriz.length
     },
-
     Matriz: function (Vertices, Aristas) {
         Matriz = []
         for (let i = 0; i < Vertices.length; i++) {
@@ -44,7 +41,7 @@ module.exports = {
 
         //alert(Index)
 
-        var tabla="<table border=\"0\" width=\"20vw\">";
+        var tabla="<table border=\"0\">";
     
         tabla+="<tr><td></td>";
         for(let j=0; j<Vertices.length ;j++){ 
@@ -60,8 +57,8 @@ module.exports = {
         tabla+="</tr>";
         }
         tabla+="</table>";
-        document.getElementById("title").innerHTML="Matriz de Adyacencia";
-        document.getElementById("tabla").innerHTML=tabla;
+        document.getElementById("title2").innerHTML="Matriz de Adyacencia";
+        document.getElementById("tabla2").innerHTML=tabla;
       },
 
     matrizAdyacencia: function (Vertices, Aristas) {
