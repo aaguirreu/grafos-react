@@ -383,6 +383,36 @@ const App = () => {
     });
   }
 
+  const clearInfo = () => {
+    document.getElementById("dirigido").innerHTML = ""
+    document.getElementById("conexo").innerHTML = ""
+    document.getElementById("regular").innerHTML = ""
+    document.getElementById("ciclico").innerHTML = ""
+    document.getElementById("completo").innerHTML = ""
+  }
+
+  const clear = document.getElementById("clear")
+  clear.addEventListener("click", (e) => {
+    setState(({ graph: { nodes, edges }, counter, ...rest }) => {
+      document.getElementById("title").innerHTML= ""
+      document.getElementById("tabla").innerHTML= ""
+      document.getElementById("cantidadv").innerHTML = ""
+      document.getElementById("cantidada").innerHTML = ""
+      clearInfo()
+      return {
+        graph: {
+          nodes: [
+          ],
+          edges: [
+          ]
+        },
+        counter: 0,
+        ...rest
+      }
+    });
+  }) 
+    
+
   const [state, setState] = useState({
     counter: 0,
     graph: {
@@ -686,6 +716,33 @@ const App2 = () => {
       return 'nw-resize';
     });
   }
+  const clearInfo2 = () => {
+    document.getElementById("dirigido2").innerHTML = ""
+    document.getElementById("conexo2").innerHTML = ""
+    document.getElementById("regular2").innerHTML = ""
+    document.getElementById("ciclico2").innerHTML = ""
+    document.getElementById("completo2").innerHTML = ""
+  }
+  const clear2 = document.getElementById("clear2")
+  clear2.addEventListener("click", (e) => {
+    setState(({ graph: { nodes, edges }, counter, ...rest }) => {
+      document.getElementById("title2").innerHTML= ""
+      document.getElementById("tabla2").innerHTML= ""
+      document.getElementById("cantidadv2").innerHTML = ""
+      document.getElementById("cantidada2").innerHTML = ""
+      clearInfo2()
+      return {
+        graph: {
+          nodes: [
+          ],
+          edges: [
+          ]
+        },
+        counter: 0,
+        ...rest
+      }
+    });
+  })
 
   const [state, setState] = useState({
     counter: 0,

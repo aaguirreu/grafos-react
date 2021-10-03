@@ -168,25 +168,35 @@ tr > :first-child {
   position: absolute;
 }
 
-.tipomatriz {
+.clear {
     filter: invert();
     background: none;
     border: none;
-    width: 30px;
-    height: 30px;
     position: absolute;
     border-radius: 2px;
-    margin-top: 0.55vh;
-    left: calc(50vw + 120px - 30px);
-    top: 0vh;
-    margin-left: 0.55vh;
+    top: 2px;
     z-index: 1;
   }
 
-  .tipomatriz:hover {
+  .clear:hover {
     background-color: rgba(0, 0, 0, 0.13);
     cursor: pointer;
     position: absolute;
+  }
+
+  .info {
+    filter: invert();
+    background: none;
+    border: none;
+    position: relative;
+    border-radius: 2px;
+    top: 20px;
+    z-index: 1;
+  }
+
+  .info:hover {
+    background-color: rgba(0, 0, 0, 0.13);
+    cursor: pointer;
   }
 
 .tool:hover {
