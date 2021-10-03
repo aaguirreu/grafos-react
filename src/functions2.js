@@ -1,15 +1,16 @@
 var Matriz = []
-var Index
 var columnas 
 var visitados
 var ciclos = new Array()
 var aux
 
-module.exports = {
-    matrizExist: function () {
-      return Matriz.length
-    },
-    Matriz: function (Vertices, Aristas) {
+function matrizExist() {
+        if(Matriz.length != 0)
+            return true
+        else return false
+    }
+
+function generarMatriz(Vertices, Aristas) {
         Matriz = []
         for (let i = 0; i < Vertices.length; i++) {
             Matriz[i] = new Array(Vertices.length)
@@ -20,13 +21,13 @@ module.exports = {
                 Matriz[i][j] = 0
             }  
         }
-        this.mostrarMatriz(Vertices, Aristas)
-      },
+        mostrarMatriz(Vertices, Aristas)
+      }
       
-    mostrarMatriz: function (Vertices, Aristas) {
+function mostrarMatriz (Vertices, Aristas) {
         let columnas2 = []
         
-        this.matrizAdyacencia(Vertices, Aristas)
+        matrizAdyacencia(Vertices, Aristas)
         for (let i = 0; i < Vertices.length; i++) {
             columnas = []
             for (let j = 0; j < Vertices.length; j++) {
@@ -41,7 +42,7 @@ module.exports = {
 
         //alert(Index)
 
-        var tabla="<table border=\"0\">";
+        var tabla="<table border=\"0\" width=\"20vw\">";
     
         tabla+="<tr><td></td>";
         for(let j=0; j<Vertices.length ;j++){ 
@@ -59,15 +60,15 @@ module.exports = {
         tabla+="</table>";
         document.getElementById("title2").innerHTML="Matriz de Adyacencia";
         document.getElementById("tabla2").innerHTML=tabla;
-      },
+      }
 
-    matrizAdyacencia: function (Vertices, Aristas) {
+function matrizAdyacencia (Vertices, Aristas)  {
         for(let arista of Aristas) {
             Matriz[arista.from - 1][arista.to - 1] = 1
           }
-    },
+    }
 
-    tipoGrafo: function (Vertices, Aristas) {
+    function tipoGrafo (Vertices, Aristas) {
         for (let i = 0; i < Aristas.length; i++) {
             //console.log(`from ${Aristas[i].from} to ${Aristas[i].to}`)
             //console.log((Aristas[i].sentido))
@@ -81,9 +82,9 @@ module.exports = {
             }
         }
         console.log("Es Simple")
-    },
+    }
 
-    dfs: function(nodo) {
+function dfs (nodo) {
         for (let j = 0; j<Matriz.length; j++){
             var v = Matriz[nodo][j];
             if( v == 1){
@@ -99,9 +100,9 @@ module.exports = {
             }
           }
 
-    },
+    }
 
-    EsConexo: function (){
+function EsConexo () {
         visitados = [];
         for(let i=0; i< Matriz.length; i++){
             visitados[i] = false;
@@ -130,10 +131,10 @@ module.exports = {
           if(cont == visitados.length){return true}
           else{return false}
 
-    },
+    }
     
     // comprobar si es regular
-    EsRegular: function(){
+function EsRegular() {
         var grado1 = 0;
         var grado2 = 0;
         var aux = 0;
@@ -162,9 +163,9 @@ module.exports = {
           
         } 
         return true;
-    },
+    }
 
-    CycleFinder: function(nodo){
+function CycleFinder(nodo) {
       for(let j = 0; j<Matriz.length; j++){
         if(Matriz[nodo][j] == 1 && j == aux){
           return true;
@@ -180,9 +181,9 @@ module.exports = {
         }
       }
       
-    },
+    }
 
-    EsCiclico: function(){
+function EsCiclico () {
         
 
         for(let i = 0; i<Matriz.length; i++){
@@ -202,9 +203,9 @@ module.exports = {
 
         }
         return false;
-    },
+    }
 
-    EsCompleto: function(){
+function EsCompleto() {
       if(this.EsRegular() == false){return false}
       else{
         var cont 
@@ -219,23 +220,23 @@ module.exports = {
         }
       }
       return true;
-    },
+    }
 
-    EsDirigido: function (){
+function EsDirigido() {
       for(let i = 0 ;i<Matriz.length;i++){
         for( let j = 0; j<Matriz.length; j++){
-          console.log(Matriz[i][j]); console.log(Matriz[j][i]);
+          //console.log(Matriz[i][j]); console.log(Matriz[j][i]);
           if(Matriz[i][j] != Matriz[j][i]){return false}
         }
       }
       return true;
-    },
+    }
 
-    CantidadV: function (){
+function CantidadV () {
       return Matriz.length;
-    },
+    }
 
-    CantidadA: function(){
+function CantidadA() {
       var sum = 0;
       for(let i =  0; i<Matriz.length; i++){
         for (let j = 0; j<Matriz.length; j++){
@@ -249,5 +250,5 @@ module.exports = {
     /*Regiones: function (){
 
     }*/
-
-}
+    const functions2 = {CantidadA, CantidadV, EsDirigido, EsCompleto, EsCiclico, CycleFinder, EsRegular, EsConexo, dfs, tipoGrafo, matrizAdyacencia, mostrarMatriz, generarMatriz, matrizExist}
+export {functions2};

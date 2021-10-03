@@ -1,8 +1,8 @@
 import './App.css';
 import Graph from "react-graph-vis";
 import React, { createRef, useState } from "react";
-import functions from './functions';
-import functions2 from './functions2';
+import {functions} from './functions';
+import {functions2} from './functions2';
 
 const options = {
   layout: {
@@ -85,7 +85,6 @@ crearEdgeDoble.addEventListener("click", (e) => {
 
 
 document.getElementById("matriz").onclick = function() {
-
     if(!functions.matrizExist() && !functions2.matrizExist()){
       alert("Debes crear un grafo para usar esta función.")
       return
@@ -355,7 +354,7 @@ const App = () => {
       const id = counter;
       const from = parseInt(selectedAux)
       const to = parseInt(selected)
-      functions.Matriz(nodes, edges)
+      functions.generarMatriz(nodes, edges)
       //tipoGrafo(Vertices, Aristas)
       return {
         graph: {
@@ -657,7 +656,7 @@ const App2 = () => {
       const id = counter;
       const from = parseInt(selectedAux)
       const to = parseInt(selected)
-      functions2.Matriz(nodes, edges)
+      functions2.generarMatriz(nodes, edges)
       //tipoGrafo(Vertices, Aristas)
       return {
         graph: {
