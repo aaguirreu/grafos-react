@@ -1,11 +1,15 @@
 var Matriz = []
-var columnas 
+//var columnas 
 var visitados
-var ciclos = new Array()
+var ciclos = []
 var aux
-
+var identidad = []
+var Mx2 = []
+var Mx3 = []
+var Camino = []
+var AristasAux
 function matrizExist() {
-        if(Matriz.length != 0)
+        if(Matriz.length !==0)
             return true
         else return false
     }
@@ -22,13 +26,15 @@ function generarMatriz(Vertices, Aristas) {
             }  
         }
         mostrarMatriz(Vertices, Aristas)
+        AristasAux = Aristas
         CantidadA(Aristas)
       }
       
 function mostrarMatriz (Vertices, Aristas) {
-        let columnas2 = []
+        //let columnas2 = []
         
         matrizAdyacencia(Vertices, Aristas)
+        /*
         for (let i = 0; i < Vertices.length; i++) {
             columnas = []
             for (let j = 0; j < Vertices.length; j++) {
@@ -40,9 +46,7 @@ function mostrarMatriz (Vertices, Aristas) {
             columnas2 += `${i+1} | ${columnas}</p/>`
             //console.log(`${i+1} | ${columnas}`)
         }
-
-        //alert(Index)
-
+      */
         var tabla="<table border=\"0\" width=\"20vw\">";
     
         tabla+="<tr><td></td>";
@@ -88,13 +92,13 @@ function matrizAdyacencia (Vertices, Aristas)  {
 function dfs (nodo) {
         for (let j = 0; j<Matriz.length; j++){
             var v = Matriz[nodo][j];
-            if( v == 1){
-              if(visitados[j] == false){
+            if( v===1){
+              if(visitados[j]===false){
                 visitados[nodo] = true; // nodo actual marcado como visitado
                 dfs(j);
                 
               }
-              if( v == 1 && visitados[j] == true && nodo == Matriz.length-1){
+              if( v === 1 && visitados[j] === true && nodo === Matriz.length-1){
                 visitados[nodo] = true;
               }
               
@@ -116,9 +120,9 @@ function EsConexo () {
           
 
           for (let i = 0; i<visitados.length; i++){
-              if(visitados[i] == false){
+              if(visitados[i] === false){
                   for (let j = 0; j<visitados.length; j++){
-                      if(Matriz[i][j] == 1){
+                      if(Matriz[i][j] === 1){
                           return true;
                       }
                   }
@@ -127,9 +131,9 @@ function EsConexo () {
 
           var cont = 0;
           for(let i = 0;i<visitados.length;i++){
-              if(visitados[i] == true){cont++}
+              if(visitados[i] === true){cont++}
           }
-          if(cont == visitados.length){return true}
+          if(cont === visitados.length){return true}
           else{return false}
 
     }
@@ -138,22 +142,21 @@ function EsConexo () {
 function EsRegular() {
         var grado1 = 0;
         var grado2 = 0;
-        var aux = 0;
 
         for(let i=0;i<Matriz.length;i++){
 
           for(let j=0; j<Matriz.length;j++){
-            if(Matriz[i][j] == 1 ){
+            if(Matriz[i][j] === 1 ){
               grado1++;
             }
           }
           //console.log('Grado1 = '+grado1+' , Grado2 = '+grado2)
-          if(i == 0){
+          if(i === 0){
             grado2 = grado1;
             grado1 = 0;
           }
           else{
-            if(grado2 != grado1){
+            if(grado2 !==grado1){
               return false;
             } 
             else{
@@ -168,10 +171,10 @@ function EsRegular() {
 
 function CycleFinder(nodo) {
       for(let j = 0; j<Matriz.length; j++){
-        if(Matriz[nodo][j] == 1 && j == aux){
+        if(Matriz[nodo][j] === 1 && j === aux){
           return true;
         }
-        if(Matriz[nodo][j] == 1){
+        if(Matriz[nodo][j] === 1){
           //console.log(ciclos);
 
           if(CycleFinder(j)){
@@ -197,7 +200,7 @@ function EsCiclico () {
           aux = c;
           var conta = 0;
           for(let j = 0; j<Matriz.length ; j++){
-            if(Matriz[j][c] == 1){conta++}
+            if(Matriz[j][c] === 1){conta++}
           }
           if(conta !==  0) {
             if(CycleFinder(c)) {
@@ -220,10 +223,10 @@ function EsCompleto() {
 
           cont = 0;
           for(let j = 0; j<Matriz.length;j++){
-            if(Matriz[i][j] == 1){cont++}
+            if(Matriz[i][j] === 1){cont++}
           }
           var M = Matriz.length -1;
-          if(cont != M){return false}
+          if(cont !==M){return false}
         }
       }
       return true;
@@ -233,7 +236,7 @@ function EsDirigido() {
       for(let i = 0 ;i<Matriz.length;i++){
         for( let j = 0; j<Matriz.length; j++){
           //console.log(Matriz[i][j]); console.log(Matriz[j][i]);
-          if(Matriz[i][j] != Matriz[j][i]){return false}
+          if(Matriz[i][j] !==Matriz[j][i]){return false}
         }
       }
       return true;
@@ -247,6 +250,14 @@ function CantidadA(Aristas) {
     var sum = 0;
     var Asimple = 0
     var Adirigida = 0
+    var undefined = 0
+    for (let i = 0; i < Matriz.length; i++) {
+      for (let j = 0; j < Matriz.length; j++) {
+        undefined = undefined + Matriz[i][j]
+      }
+      
+    }
+    if(undefined === 0){return 0}
     /*if(!EsDirigido()) {
       for(let i =  0; i<Matriz.length; i++){
         for (let j = 0; j<Matriz.length; j++){
@@ -265,10 +276,133 @@ function CantidadA(Aristas) {
     Asimple = Asimple/2
     sum = Asimple + Adirigida
     document.getElementById("cantidada").innerHTML = `Cantidad de Aristas: ${sum}`
-      
+    document.getElementById("cantidadv").innerHTML = `Cantidad de Aristas: ${CantidadV()}`
+    return sum 
 }
-    /*Regiones: function (){
 
-    }*/
-    const functions = {CantidadA, CantidadV, EsDirigido, EsCompleto, EsCiclico, CycleFinder, EsRegular, EsConexo, dfs, tipoGrafo, matrizAdyacencia, mostrarMatriz, generarMatriz, matrizExist}
+function Regiones (){
+  var v = CantidadV();
+  var e = CantidadA(AristasAux);
+  var r = 2-v+e;
+  return r;
+}
+
+function MulTMat() {
+  var MP = [];
+  for(let i = 0; i< Matriz.length; i++) {
+    MP[i] = [];
+    for( let j = 0; j<Matriz.length; j++){
+      MP[i][j] = 0;
+      for(let k = 0; k<Matriz.length; k++){
+        MP[i][j] += Matriz[i][k] * Mx2[k][j];
+      }
+      //console.log('Camino '+i+', '+j+' = '+MP[i][j])
+    }
+    //console.log(Camino[i])
+
+  }
+  return MP;
+}
+
+function Caminos() {
+
+  //console.log('Matriz de identidad NxN')
+  for( let i = 0; i<Matriz.length;i++){
+    identidad[i] = [];
+    Camino[i] = [];
+    Mx2[i] = [];
+    Mx3[i] = [];
+    for(let j = 0;j<Matriz.length;j++){
+      Camino[i][j] = 0;
+      Mx2[i][j] = 0;
+      Mx3[i][j] = 0;
+      if(i === j){identidad[i][j]=1}
+      else{identidad[i][j]=0}
+    }
+  }
+  //console.table(identidad);
+  /*
+  var camino = Matriz
+  var suma = 0
+  for (let n = 0; n < Matriz.length - 1; n++) {
+    
+    for (let i = 0; i < Matriz.length; i++) {
+      for (let j = 0; j < Matriz.length; j++) {
+        for (let k = 0; k < Matriz.length; k++) {
+          suma = Matriz[i][k] * camino[i][k]
+        }
+        camino[i][j] = suma;
+      }
+    }
+    
+  }
+  
+  console.table(camino)
+  */
+ 
+  for(let i = 0; i< Matriz.length; i++) {
+    for( let j = 0; j<Matriz.length; j++){
+      for(let k = 0; k<Matriz.length; k++){
+        Mx2[i][j] += Matriz[i][k] * Matriz[k][j]; ///Matrices de adyacencia elevada a 2
+      }
+      //console.log('Camino '+i+', '+j+' = '+Mx2[i][j])
+    }
+    //console.log(Camino[i])
+  }
+
+    for( let i = 0; i<Matriz.length;i++){
+      for (let j = 0; j< Matriz.length; j++){
+        Camino[i][j] = identidad[i][j] + Matriz[i][j]
+      }
+    }
+
+  for(let cont = 1; cont <Matriz.length-1 ; cont ++) {
+
+      if(cont === 1){
+        for( let i = 0; i<Matriz.length;i++){
+          for (let j = 0; j< Matriz.length; j++){
+            Camino[i][j] += Mx2[i][j];
+          }
+        }
+      }
+      else{
+        Mx3 = this.MulTMat()
+
+        for( let i = 0; i<Matriz.length;i++){
+          for (let j = 0; j< Matriz.length; j++){
+            Camino[i][j] += Mx3[i][j];
+          }
+        }
+        Mx2 = Mx3;
+      }
+    }
+
+  var tabla2="<table border=\"0\" width=\"20vw\">";
+    
+  tabla2+="<tr><td></td>";
+  for(let j=0; j<Camino.length ;j++){ 
+      tabla2+="<td>"+(j+1)+ "</td>";
+  }
+
+  for(let i=0; i < Camino.length; i++) {
+      tabla2+="<tr>";
+      tabla2+="<td>" + (i+1) + "</td>";
+      for(let j=0; j < Camino.length; j++) { 
+          tabla2+="<td>" + Camino[i][j] + "</td>";
+      }
+  tabla2+="</tr>";
+  }
+  tabla2+="</table>";
+  
+  //console.table(Camino)
+        document.getElementById("ctitle").innerHTML="Matriz de Caminos";
+        document.getElementById("ctabla").innerHTML=tabla2;
+  for( let i = 0; i<Matriz.length;i++){
+      //console.log(Camino[i]);
+  }
+  
+}
+    const functions = {CantidadA, CantidadV, EsDirigido, EsCompleto, EsCiclico, CycleFinder, 
+      EsRegular, EsConexo, dfs, tipoGrafo, matrizAdyacencia, mostrarMatriz, generarMatriz, 
+      matrizExist, Caminos, Regiones, MulTMat}
 export {functions};

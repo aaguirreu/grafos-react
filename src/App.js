@@ -13,20 +13,16 @@ const options = {
   }
 };
 
-var Aristas = []
-var Vertices = []
-
 var tool = "nodes"
 var selected
 var selectedAux
 var selectedNode
-var selectedEdge
 
 function randomColor() {
-  const red = Math.floor(Math.random() * 256).toString(16).padStart(2, '0');
+  /*const red = Math.floor(Math.random() * 256).toString(16).padStart(2, '0');
   const green = Math.floor(Math.random() * 256).toString(16).padStart(2, '0');
   const blue = Math.floor(Math.random() * 256).toString(16).padStart(2, '0');
-  //return `#${red}${green}${blue}`;
+  return `#${red}${green}${blue}`; */
   const colores = ['white','#BDFFFF','#BDDEFF','#BDBDFF','#DEBDFF','#B2FFCE','#B2FFF5','#B2E3FF','#FFBDDE','#FFBDFF','#F4B2FF']
   //const colores = ['white','#FF93EB','#1C80B5','#1C34B5','#511CB5','#9D1CB5','#B51C80','#B51C33']
   return colores[Math.floor(Math.random()*colores.length)];
@@ -140,71 +136,71 @@ function info() {
       return
     }*/
 
-    if(functions.matrizExist()) {
-      document.getElementById("cantidadv").innerHTML = 'Cantidad de Vertices: '+functions.CantidadV();
-      
-      if(functions.EsDirigido() == false){
+    if(functions.matrizExist()) {      
+      if(functions.EsDirigido() === false){
         document.getElementById("dirigido").innerHTML = 'El grafo es Dirigido'
       }
       else{document.getElementById("dirigido").innerHTML = 'El grafo es Simple'}
   
-      if(functions.EsConexo() == true){
+      if(functions.EsConexo() === true){
         document.getElementById("conexo").innerHTML = 'El grafo es Conexo';
       }
       else{
         document.getElementById("conexo").innerHTML = 'El grafo es Inconexo';
       }
       
-      if(functions.EsRegular() == true){
+      if(functions.EsRegular() === true){
         document.getElementById("regular").innerHTML = 'El grafo es Regular'
       }
       else{document.getElementById("regular").innerHTML = 'El grafo no es Regular'}
   
-      if(functions.EsCiclico() == true){
+      if(functions.EsCiclico() === true){
         document.getElementById("ciclico").innerHTML = 'El grafo es ciclico'
       }
       else{document.getElementById("ciclico").innerHTML = 'El grafo es Aciclico'}
   
-      if(functions.EsCompleto() == true){
+      if(functions.EsCompleto() === true){
         document.getElementById("completo").innerHTML = 'El grafo es Completo'
       }
       else{document.getElementById("completo").innerHTML = 'El grafo es Incompleto'}
     }
-
+    functions.Caminos()
+    document.getElementById("cregiones").innerHTML = `Cantidad de regiones: ${functions.Regiones()}`
 }
 
 function info2() {
 
     if(functions2.matrizExist()) {
 
-      document.getElementById("cantidadv2").innerHTML = 'Cantidad de vertices: '+functions2.CantidadV();
-      if(functions2.EsDirigido() == false){
+      if(functions2.EsDirigido() === false){
         document.getElementById("dirigido2").innerHTML = 'El grafo es Dirigido'
       }
       else{document.getElementById("dirigido2").innerHTML = 'El grafo es Simple'}
   
-      if(functions2.EsConexo() == true){
+      if(functions2.EsConexo() === true){
         document.getElementById("conexo2").innerHTML = 'El grafo es Conexo';
       }
       else{
         document.getElementById("conexo2").innerHTML = 'El grafo es Inconexo';
       }
       
-      if(functions.EsRegular() == true){
+      if(functions.EsRegular() === true){
         document.getElementById("regular2").innerHTML = 'El grafo es Regular'
       }
       else{document.getElementById("regular2").innerHTML = 'El grafo no es Regular'}
   
-      if(functions.EsCiclico() == true){
+      if(functions.EsCiclico() === true){
         document.getElementById("ciclico2").innerHTML = 'El grafo es ciclico'
       }
       else{document.getElementById("ciclico2").innerHTML = 'El grafo es Aciclico'}
   
-      if(functions.EsCompleto() == true){
+      if(functions.EsCompleto() === true){
         document.getElementById("completo2").innerHTML = 'El grafo es Completo'
       }
       else{document.getElementById("completo2").innerHTML = 'El grafo es Incompleto'}
     }
+    functions2.Caminos()
+    document.getElementById("cregiones2").innerHTML = `Cantidad de regiones: ${functions2.Regiones()}`
   }
 
 const App = () => {
@@ -212,9 +208,8 @@ const App = () => {
   const createNode = (x, y, selected) => {
     setState(({ graph: { nodes, edges }, counter, ...rest }) => {
       const id = counter + 1;
-      const from = parseInt(selected)
       var label = `${id}`
-      if (id.toString().length == 1)
+      if (id.toString().length === 1)
         label = ` ${id} `
       return {
         graph: {
@@ -252,7 +247,7 @@ const App = () => {
         }
       }
       for(let i of edges) {
-        if(i.from === from && i.to === to || i.to === from && i.from === to) {
+        if(i.from === from && i.to === to) {
           //console.log(`Ya existe ${i}`)
           return {
             graph: {
@@ -338,7 +333,7 @@ const App = () => {
       }
     });
   }
-
+/*
   const infoEdges = (selec) => {
     setState(({ graph: { nodes, edges }, counter, ...rest }) => {
       const id = counter;
@@ -396,12 +391,10 @@ const App = () => {
       }
     });
   }
-
+*/
   const crearMatriz = () => {
     setState(({ graph: { nodes, edges }, counter, ...rest }) => {
       const id = counter;
-      const from = parseInt(selectedAux)
-      const to = parseInt(selected)
       functions.generarMatriz(nodes, edges)
       if(mostrarInfoBool)
       info()
@@ -423,6 +416,7 @@ const App = () => {
 
   const [cursor, setCursor] = useState('crosshair');
 
+  /*
   const changeCursor = () => {
     setCursor(prevState => {
       console.log('setcursor')
@@ -431,8 +425,7 @@ const App = () => {
       }
       return 'nw-resize';
     });
-  }
-
+  }*/
 
   const clear = document.getElementById("clear")
   clear.addEventListener("click", (e) => {
@@ -465,8 +458,8 @@ const App = () => {
     },
     events: {
       selectNode: ({ nodes }) => {
-        console.log("Selected nodes:");
-        console.log(nodes);
+        //"Selected nodes:");
+        //console.log(nodes);
         //alert("Selected node: " + nodes);
         selectedNode = nodes
         selected = nodes
@@ -490,8 +483,8 @@ const App = () => {
         //createEdge(canvas.x, canvas.y, selectedEdge);
       },
       deselectNode:  () => {
-        console.log("Deselected node:");
-        console.log(selected);
+        //console.log("Deselected node:");
+        //console.log(selected);
         selectedAux = selected
         if (tool === "await2") {
           tool = "edges-one"
@@ -508,8 +501,8 @@ const App = () => {
         
       },
       deselectEdge:  () => {
-        console.log("Deselected edge:");
-        console.log(selected);
+        //console.log("Deselected edge:");
+        //console.log(selected);
         selectedAux = selected
       }
     }
@@ -535,9 +528,8 @@ const App2 = () => {
   const createNode = (x, y, selected) => {
     setState(({ graph: { nodes, edges }, counter, ...rest }) => {
       const id = counter + 1;
-      const from = parseInt(selected)
       var label = `${id}'`
-      if (id.toString().length == 1)
+      if (id.toString().length === 1)
         label = `${id}'`
       return {
         graph: {
@@ -575,7 +567,7 @@ const App2 = () => {
         }
       }
       for(let i of edges) {
-        if(i.from === from && i.to === to || i.to === from && i.from === to) {
+        if(i.from === from && i.to === to) {
           //console.log(`Ya existe ${i}`)
           return {
             graph: {
@@ -662,6 +654,7 @@ const App2 = () => {
     });
   }
 
+  /*
   const infoEdges = (selec) => {
     setState(({ graph: { nodes, edges }, counter, ...rest }) => {
       const id = counter;
@@ -718,14 +711,12 @@ const App2 = () => {
         ...rest
       }
     });
-  }
+  }*/
 
   const crearMatriz = () => {
     
     setState(({ graph: { nodes, edges }, counter, ...rest }) => {
       const id = counter;
-      const from = parseInt(selectedAux)
-      const to = parseInt(selected)
       functions2.generarMatriz(nodes, edges)
       if(mostrarInfoBool2)
       info()
@@ -746,7 +737,7 @@ const App2 = () => {
   }
 
   const [cursor, setCursor] = useState('crosshair');
-
+  /*
   const changeCursor = () => {
     setCursor(prevState => {
       console.log('setcursor')
@@ -755,7 +746,7 @@ const App2 = () => {
       }
       return 'nw-resize';
     });
-  }
+  }*/
 
   const clear2 = document.getElementById("clear2")
   clear2.addEventListener("click", (e) => {
@@ -787,8 +778,8 @@ const App2 = () => {
     },
     events: {
       selectNode: ({ nodes }) => {
-        console.log("Selected nodes:");
-        console.log(nodes);
+        //console.log("Selected nodes:");
+        //console.log(nodes);
         //alert("Selected node: " + nodes);
         selectedNode = nodes
         selected = nodes
@@ -812,8 +803,8 @@ const App2 = () => {
         //createEdge(canvas.x, canvas.y, selectedEdge);
       },
       deselectNode:  () => {
-        console.log("Deselected node:");
-        console.log(selected);
+        //console.log("Deselected node:");
+        //console.log(selected);
         selectedAux = selected
         if (tool === "await2") {
           tool = "edges-one"
@@ -830,8 +821,8 @@ const App2 = () => {
         
       },
       deselectEdge:  () => {
-        console.log("Deselected edge:");
-        console.log(selected);
+        //console.log("Deselected edge:");
+        //console.log(selected);
         selectedAux = selected
       }
     }
