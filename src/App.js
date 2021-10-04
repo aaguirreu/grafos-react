@@ -30,8 +30,14 @@ function randomColor() {
   const colores = ['white','#BDFFFF','#BDDEFF','#BDBDFF','#DEBDFF','#B2FFCE','#B2FFF5','#B2E3FF','#FFBDDE','#FFBDFF','#F4B2FF']
   //const colores = ['white','#FF93EB','#1C80B5','#1C34B5','#511CB5','#9D1CB5','#B51C80','#B51C33']
   return colores[Math.floor(Math.random()*colores.length)];
-
 }
+
+var color = randomColor()
+var color2 = color
+while (color2 === color) {
+  color2 = randomColor()
+}
+
 
 const crearNode = document.querySelector('button[name=nodes]')
 const crearEdge = document.querySelector('button[name=edges-one]')
@@ -39,6 +45,34 @@ const crearEdgeDoble = document.querySelector('button[name=edges-doble]')
 const closebtn = document.querySelector('button[name=closebtn]')
 const sidebar = document.querySelector('.sidebar_left')
 const sidebar2 = document.querySelector('.sidebar_left2')
+const mostrarInfo = document.getElementById("info")
+const mostrarInfo2 = document.getElementById("info2")
+var mostrarInfoBool = false
+var mostrarInfoBool2 = false
+
+mostrarInfo.addEventListener("click", () => {
+  if(mostrarInfo.className === "info on") {
+    mostrarInfo.setAttribute("class","info")
+    mostrarInfoBool = false
+    clearInfo()
+  } else {
+    mostrarInfo.setAttribute("class","info on")
+    mostrarInfoBool = true
+    info()
+  }
+})
+
+mostrarInfo2.addEventListener("click", () => {
+  if(mostrarInfo2.className === "info on") {
+    mostrarInfo2.setAttribute("class","info")
+    mostrarInfoBool2 = false
+    clearInfo2()
+  } else {
+    mostrarInfo2.setAttribute("class","info on")
+    mostrarInfoBool2 = true
+    info2()
+  }
+})
 
 closebtn.addEventListener("click", () => {
   closebtn.setAttribute("class","closebtn on")
@@ -83,13 +117,28 @@ crearEdgeDoble.addEventListener("click", (e) => {
   //changeCursor()
 })
 
+const clearInfo = () => {
+  document.getElementById("dirigido").innerHTML = ""
+  document.getElementById("conexo").innerHTML = ""
+  document.getElementById("regular").innerHTML = ""
+  document.getElementById("ciclico").innerHTML = ""
+  document.getElementById("completo").innerHTML = ""
+}
+
+const clearInfo2 = () => {
+  document.getElementById("dirigido2").innerHTML = ""
+  document.getElementById("conexo2").innerHTML = ""
+  document.getElementById("regular2").innerHTML = ""
+  document.getElementById("ciclico2").innerHTML = ""
+  document.getElementById("completo2").innerHTML = ""
+}
+
 function info() {
 //document.getElementById("matriz").onclick = function() {
     /*if(!functions.matrizExist() && !functions2.matrizExist()){
       alert("Debes crear un grafo para usar esta función.")
       return
     }*/
-    
 
     if(functions.matrizExist()) {
       document.getElementById("cantidadv").innerHTML = 'Cantidad de Vertices: '+functions.CantidadV();
@@ -121,7 +170,10 @@ function info() {
       }
       else{document.getElementById("completo").innerHTML = 'El grafo es Incompleto'}
     }
-    // Grafo 2 
+
+}
+
+function info2() {
 
     if(functions2.matrizExist()) {
 
@@ -185,7 +237,6 @@ const App = () => {
       const id = counter;
       const from = parseInt(selectedAux)
       const to = parseInt(selected)
-      console.log("aqui1")
       if (isNaN(from)) {
         return {
           graph: {
@@ -200,7 +251,6 @@ const App = () => {
           ...rest
         }
       }
-      console.log("aqui2")
       for(let i of edges) {
         if(i.from === from && i.to === to || i.to === from && i.from === to) {
           //console.log(`Ya existe ${i}`)
@@ -219,7 +269,6 @@ const App = () => {
         }
       }
       tool = "2await"
-      console.log("aqui3")
       return {
         graph: {
           nodes: [
@@ -354,6 +403,7 @@ const App = () => {
       const from = parseInt(selectedAux)
       const to = parseInt(selected)
       functions.generarMatriz(nodes, edges)
+      if(mostrarInfoBool)
       info()
       //tipoGrafo(Vertices, Aristas)
       return {
@@ -383,13 +433,6 @@ const App = () => {
     });
   }
 
-  const clearInfo = () => {
-    document.getElementById("dirigido").innerHTML = ""
-    document.getElementById("conexo").innerHTML = ""
-    document.getElementById("regular").innerHTML = ""
-    document.getElementById("ciclico").innerHTML = ""
-    document.getElementById("completo").innerHTML = ""
-  }
 
   const clear = document.getElementById("clear")
   clear.addEventListener("click", (e) => {
@@ -489,19 +532,18 @@ const App = () => {
 // Grafo 2 
 
 const App2 = () => {
-  var color = randomColor()
   const createNode = (x, y, selected) => {
     setState(({ graph: { nodes, edges }, counter, ...rest }) => {
       const id = counter + 1;
       const from = parseInt(selected)
       var label = `${id}'`
       if (id.toString().length == 1)
-        label = ` ${id}' `
+        label = `${id}'`
       return {
         graph: {
           nodes: [
             ...nodes,
-            { id: id, label: label, color, x, y }
+            { id: id, label: label, color: color2, x, y }
           ],
           edges: [
             ...edges,
@@ -518,7 +560,6 @@ const App2 = () => {
       const id = counter;
       const from = parseInt(selectedAux)
       const to = parseInt(selected)
-      console.log("aqui1")
       if (isNaN(from)) {
         return {
           graph: {
@@ -533,7 +574,6 @@ const App2 = () => {
           ...rest
         }
       }
-      console.log("aqui2")
       for(let i of edges) {
         if(i.from === from && i.to === to || i.to === from && i.from === to) {
           //console.log(`Ya existe ${i}`)
@@ -552,7 +592,6 @@ const App2 = () => {
         }
       }
       tool = "2await"
-      console.log("aqui3")
       return {
         graph: {
           nodes: [
@@ -688,6 +727,7 @@ const App2 = () => {
       const from = parseInt(selectedAux)
       const to = parseInt(selected)
       functions2.generarMatriz(nodes, edges)
+      if(mostrarInfoBool2)
       info()
       //tipoGrafo(Vertices, Aristas)
       return {
@@ -716,13 +756,7 @@ const App2 = () => {
       return 'nw-resize';
     });
   }
-  const clearInfo2 = () => {
-    document.getElementById("dirigido2").innerHTML = ""
-    document.getElementById("conexo2").innerHTML = ""
-    document.getElementById("regular2").innerHTML = ""
-    document.getElementById("ciclico2").innerHTML = ""
-    document.getElementById("completo2").innerHTML = ""
-  }
+
   const clear2 = document.getElementById("clear2")
   clear2.addEventListener("click", (e) => {
     setState(({ graph: { nodes, edges }, counter, ...rest }) => {

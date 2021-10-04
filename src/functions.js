@@ -22,7 +22,7 @@ function generarMatriz(Vertices, Aristas) {
             }  
         }
         mostrarMatriz(Vertices, Aristas)
-        CantidadA()
+        CantidadA(Aristas)
       }
       
 function mostrarMatriz (Vertices, Aristas) {
@@ -75,14 +75,14 @@ function matrizAdyacencia (Vertices, Aristas)  {
             //console.log((Aristas[i].sentido))
             var aux = 0
             if(Aristas[i].sentido !== 'Simple') {
-                console.log("Es dirigido")
+                //console.log("Es dirigido")
                 aux = 1
             } else {
             } if (aux === 1) {
                 return;
             }
         }
-        console.log("Es Simple")
+        //console.log("Es Simple")
     }
 
 function dfs (nodo) {
@@ -147,7 +147,7 @@ function EsRegular() {
               grado1++;
             }
           }
-          console.log('Grado1 = '+grado1+' , Grado2 = '+grado2)
+          //console.log('Grado1 = '+grado1+' , Grado2 = '+grado2)
           if(i == 0){
             grado2 = grado1;
             grado1 = 0;
@@ -172,10 +172,10 @@ function CycleFinder(nodo) {
           return true;
         }
         if(Matriz[nodo][j] == 1){
-          console.log(ciclos);
+          //console.log(ciclos);
 
           if(CycleFinder(j)){
-            console.log(ciclos);
+            //console.log(ciclos);
             return true;
           }
 
@@ -185,12 +185,13 @@ function CycleFinder(nodo) {
     }
 
 function EsCiclico () {
-        
 
-        for(let i = 0; i<Matriz.length; i++){
+        if(EsDirigido()) {
+
+          for(let i = 0; i<Matriz.length; i++){
             ciclos[i] = false;
         }
-        console.log(ciclos);
+        //console.log(ciclos);
 
         for(let c = 0; c<ciclos.length;c++){
           aux = c;
@@ -198,12 +199,17 @@ function EsCiclico () {
           for(let j = 0; j<Matriz.length ; j++){
             if(Matriz[j][c] == 1){conta++}
           }
-          if(conta !==  0){if(CycleFinder(c)){return true}}
-          
-          
-
+          if(conta !==  0) {
+            if(CycleFinder(c)) {
+              return true
+            }
+          }
         }
         return false;
+
+        } else {
+          return true;
+        }
     }
 
 function EsCompleto() {
@@ -237,16 +243,30 @@ function CantidadV () {
       return Matriz.length;
     }
 
-function CantidadA() {
-      var sum = 0;
+function CantidadA(Aristas) {
+    var sum = 0;
+    var Asimple = 0
+    var Adirigida = 0
+    /*if(!EsDirigido()) {
       for(let i =  0; i<Matriz.length; i++){
         for (let j = 0; j<Matriz.length; j++){
           if (i<=j)
           sum +=Matriz[i][j];
         }
       }
-      document.getElementById("cantidada").innerHTML = `Cantidad de Aristas: ${sum}`
+    }*/
+    for (let i = 0; i < Aristas.length; i++) {
+      //console.log(Aristas[i].sentido)
+        if(Aristas[i].sentido === 'Simple')
+          Asimple++
+        if(Aristas[i].sentido === 'Dirigido')
+          Adirigida++
     }
+    Asimple = Asimple/2
+    sum = Asimple + Adirigida
+    document.getElementById("cantidada").innerHTML = `Cantidad de Aristas: ${sum}`
+      
+}
     /*Regiones: function (){
 
     }*/
